@@ -3204,14 +3204,6 @@ $(document).on('click', '#delete_project', function (e) {
   // console.log('id',id);
   (0, _deleteProjectData.deleteProjectData)(id);
 });
-
-// $(document).ready(function () {
-//   $('.add').click(function () {
-//     var projectId = $(this).data('id');
-//     console.log('Project Id:', projectId);
-//     showTask(projectId);
-//   });
-// });
 },{"./admin":"admin.js","./login":"login.js","./addClient":"addClient.js","./editClient":"editClient.js","./deleteClientData ":"deleteClientData .js","./employee":"employee.js","./addProject":"addProject.js","./editProjectData":"editProjectData.js","./deleteProjectData":"deleteProjectData.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

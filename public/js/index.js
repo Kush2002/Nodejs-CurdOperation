@@ -220,11 +220,3 @@ $(document).on('click', '#delete_project', function (e) {
   // console.log('id',id);
   deleteProjectData(id);
 });
-
-// $(document).ready(function () {
-//   $('.add').click(function () {
-//     var projectId = $(this).data('id');
-//     console.log('Project Id:', projectId);
-//     showTask(projectId);
-//   });
-// });
