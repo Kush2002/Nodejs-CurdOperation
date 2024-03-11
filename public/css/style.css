@@ -1,0 +1,52 @@
+.text-color{
+    text-align: center;
+}
+
+.toggle{
+    color: red;
+}
+
+body .alert {
+    padding: 20px;
+    background-color: #fa3e3e;
+    color: white;
+    opacity: 0.83;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+}
+
+body .alert.success {
+    background-color: #039752;
+}
+
+input:not([type="checkbox"]), textarea {
+    border-radius: 50px !important;
+    padding: 12px 15px 12px 15px !important;
+    width: 100%;
+    box-sizing: border-box;
+    border: none !important;
+    border: 1px solid #F3E5F5 !important;
+    font-size: 16px !important;
+    color: #000 !important;
+    font-weight: 400;
+}
+
+input:focus, textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #448EE4 !important;
+    outline-width: 0;
+    font-weight: 400;
+}
+
+.card {
+    border-radius: 5px;
+    border: none;
+}
+
+.card1 {
+    width: 60%;
+    padding: 4px 8px 4px 8px;
+    margin: auto;
+}

@@ -1,0 +1,63 @@
+exports.getProjectManager = catchAsync(async (req, res, next) => {
+    const adminRole = 'admin';
+    const employeeRole = 'employee';
+    let clients;
+    let projects;
+    let employee;
+      if (res.locals.user && res.locals.user.role === adminRole) {
+        clients = await Client.find({ role: { $ne: adminRole } });
+        clients = await Client.find();
+        employee = await Employee.find();
+        projects = await Project.find();
+      } else if (res.locals.employee && res.locals.employee.role === employeeRole) {
+        employee = await Employee.find({ role: { $ne: employeeRole } });
+        const roles = 'admin';
+        clients = await Client.find({ role: {$ne: roles}});
+        employee = await Employee.find();
+        projects = await Project.find();
+      } else {
+        const username = res.locals.user ? res.locals.user.username : null;
+        clients = await Client.find({ username });
+        const roles = 'admin';
+        clients = await Client.find({ role: {$ne: roles}});
+        employee = await Employee.find();
+        projects = await Project.find();
+      }
+      console.log('Clients:', clients);
+      console.log('Projects:', projects);
+      console.log('Employee:', employee);
+      res.status(200).render('project', {
+        title: 'PMS Project',
+        text: 'Project Management',
+        client: clients,
+        project: projects,
+        emp: res.locals.employee,
+        user: res.locals.user
+      });
+  });
+
+<%= (emp && emp.empName) ? emp.empName : user.username %>
+
+
+
+
+old code 
+exports.getProjectManager = catchAsync(async (req, res, next) => {
+  const roles = 'admin';
+  let clients
+  let projets
+  if (res.locals.user.role == 'admin') {
+    clients = await Client.find({ role: { $ne: roles } });
+    projets = await Project.find();
+  } else {
+    clients = await Client.findOne({ username: res.locals.user.username });
+    projets = await Project.find({ username: res.locals.user.username });
+  }
+  res.status(200).render('project', {
+    title: 'PMS Project',
+    text: 'Project Managment',
+    client: clients,
+    project: projets,
+    user: res.locals.user
+  });
+});
