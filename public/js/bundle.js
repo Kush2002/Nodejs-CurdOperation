@@ -2401,12 +2401,12 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var addTask = exports.addTask = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(taskName, employeeName, description, endDates) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(taskName, employeeName, description, endDates, projectId) {
     var result;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          console.log(taskName, employeeName, description, endDates);
+          console.log(taskName, employeeName, description, endDates, projectId);
           _context.prev = 1;
           _context.next = 4;
           return (0, _axios.default)({
@@ -2416,7 +2416,8 @@ var addTask = exports.addTask = /*#__PURE__*/function () {
               taskName: taskName,
               employeeName: employeeName,
               description: description,
-              endDates: endDates
+              endDates: endDates,
+              projectId: projectId
             }
           });
         case 4:
@@ -2440,7 +2441,7 @@ var addTask = exports.addTask = /*#__PURE__*/function () {
       }
     }, _callee, null, [[1, 8]]);
   }));
-  return function addTask(_x, _x2, _x3, _x4) {
+  return function addTask(_x, _x2, _x3, _x4, _x5) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -2485,7 +2486,7 @@ var addClient = exports.addClient = /*#__PURE__*/function () {
       }
     }, _callee2, null, [[0, 7]]);
   }));
-  return function addClient(_x5, _x6, _x7, _x8, _x9, _x10) {
+  return function addClient(_x6, _x7, _x8, _x9, _x10, _x11) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -3021,12 +3022,14 @@ var _deleteProjectData = require("./deleteProjectData");
 
 // ==========  CLIENT  ==========
 
+// ==========  SHOW TASK  ==========
+
 // ==========  EMPLOYEE  ==========
 
 // ==========  PROJECT  ==========
 
 // ==================================================  ADMIN  ==================================================
-// ADMIN LOGIN 
+// ADMIN LOGIN
 $(document).on('submit', '#adminForm', function (e) {
   e.preventDefault();
   var username = $(this).find('input[name=username]').val();
@@ -3043,7 +3046,7 @@ $(document).on('click', '#adminlogoutBtn', function (e) {
 });
 
 // ==================================================  CLIENT  ==================================================
-// LOGIN 
+// LOGIN
 $(document).on('submit', '#form', function (e) {
   e.preventDefault();
   var username = $(this).find('input[name=username]').val();
@@ -3058,15 +3061,16 @@ $(document).on('click', '#logoutBtn', function (e) {
   (0, _login.logout)();
 });
 
-// ******************************  TASK ADD  ******************************
+// ******************************  TASK ADD  ******************************===========================
 $(document).on('submit', '#task_add', function (e) {
   e.preventDefault();
   var taskName = $(this).find('input[name=taskName]').val();
   var employeeName = $(this).find('select[name=employeeName]').val();
   var description = $(this).find('input[name=description]').val();
   var endDates = $(this).find('input[name=endDates]').val();
-  console.log(taskName, employeeName, description, endDates);
-  (0, _addClient.addTask)(taskName, employeeName, description, endDates);
+  var projectId = $('div[data-id]').data('id');
+  console.log(taskName, employeeName, description, endDates, projectId);
+  (0, _addClient.addTask)(taskName, employeeName, description, endDates, projectId);
 });
 
 // ADD CLIENT
@@ -3106,7 +3110,7 @@ $(document).on('click', '#delete_user', function (e) {
 
 // ==================================================  EMPLOYEE  ==================================================
 
-// EMPLOYEE LOGIN 
+// EMPLOYEE LOGIN
 $(document).on('submit', '#employee_login', function (e) {
   e.preventDefault();
   var empEmail = $(this).find('input[name=email]').val();
@@ -3152,7 +3156,7 @@ $(document).on('submit', '#employee_edit', function (e) {
 $(document).on('click', '#delete_employee', function (e) {
   e.preventDefault();
   var id = $(this).data('id');
-  // console.log('id',id);  
+  // console.log('id',id);
   (0, _employee.deleteEmployee)(id);
 });
 
@@ -3200,6 +3204,14 @@ $(document).on('click', '#delete_project', function (e) {
   // console.log('id',id);
   (0, _deleteProjectData.deleteProjectData)(id);
 });
+
+// $(document).ready(function () {
+//   $('.add').click(function () {
+//     var projectId = $(this).data('id');
+//     console.log('Project Id:', projectId);
+//     showTask(projectId);
+//   });
+// });
 },{"./admin":"admin.js","./login":"login.js","./addClient":"addClient.js","./editClient":"editClient.js","./deleteClientData ":"deleteClientData .js","./employee":"employee.js","./addProject":"addProject.js","./editProjectData":"editProjectData.js","./deleteProjectData":"deleteProjectData.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -3225,7 +3237,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51296" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53812" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

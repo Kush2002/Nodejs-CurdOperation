@@ -134,7 +134,7 @@ exports.getEmployeeManager = catchAsync(async (req, res, next) => {
     employee = await Employee.find();
   }
   res.status(200).render('employee', {
-    title: 'PMS Project',
+    title: 'PMS || Employee Managment',
     text: 'Employee Management',
     employee: employee,
     emp: res.locals.employee,
@@ -202,7 +202,7 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
     const roles = 'employee';
     clients = await Client.find({ role: { $ne: roles } });
     task = await Task.find();
-    projects = await Project.find({ empName: res.locals.emp.empName });
+    projects = await Project.find();
     employee = await Employee.find();
   } else {
     const username = res.locals.user ? res.locals.user.username : null;
@@ -212,7 +212,8 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
     employee = await Employee.find();
     projects = await Project.find({ username });
   }
-  // console.log('Employee:', employee);
+  // console.log('Task', task);
+  console.log('Employee:', employee);
   res.status(200).render('project', {
     title: 'PMS Project',
     text: 'Project Management',
@@ -224,6 +225,7 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
     user: res.locals.user,
   });
 });
+
 // ================================= ***** ADD TASK ***** =================================
 // ADD TASK
 exports.add_task = catchAsync(async (req, res, next) => {
