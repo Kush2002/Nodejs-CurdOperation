@@ -6,9 +6,17 @@ export const addTask = async (
   employeeName,
   description,
   endDates,
-  projectId
+  projectId,
+  currentDate
 ) => {
-  console.log(taskName, employeeName, description, endDates, projectId);
+  console.log(
+    taskName,
+    employeeName,
+    description,
+    endDates,
+    projectId,
+    currentDate
+  );
   try {
     const result = await axios({
       method: 'POST',
@@ -19,6 +27,7 @@ export const addTask = async (
         description,
         endDates,
         projectId,
+        currentDate,
       },
     });
     // console.log(result);

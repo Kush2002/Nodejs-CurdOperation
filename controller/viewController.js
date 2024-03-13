@@ -201,6 +201,7 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
   } else if (res.locals.emp && res.locals.emp.role === employeeRole) {
     const empName = res.locals.emp.empName;
     employee = await Employee.find({ role: { $ne: employeeRole } });
+    employee = await Employee.find();
     const roles = 'admin';
     clients = await Client.find({ role: { $ne: roles } });
     projects = await Project.find({ empName });

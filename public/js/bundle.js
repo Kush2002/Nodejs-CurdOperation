@@ -2401,12 +2401,12 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var addTask = exports.addTask = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(taskName, employeeName, description, endDates, projectId) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(taskName, employeeName, description, endDates, projectId, currentDate) {
     var result;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          console.log(taskName, employeeName, description, endDates, projectId);
+          console.log(taskName, employeeName, description, endDates, projectId, currentDate);
           _context.prev = 1;
           _context.next = 4;
           return (0, _axios.default)({
@@ -2417,7 +2417,8 @@ var addTask = exports.addTask = /*#__PURE__*/function () {
               employeeName: employeeName,
               description: description,
               endDates: endDates,
-              projectId: projectId
+              projectId: projectId,
+              currentDate: currentDate
             }
           });
         case 4:
@@ -2441,7 +2442,7 @@ var addTask = exports.addTask = /*#__PURE__*/function () {
       }
     }, _callee, null, [[1, 8]]);
   }));
-  return function addTask(_x, _x2, _x3, _x4, _x5) {
+  return function addTask(_x, _x2, _x3, _x4, _x5, _x6) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -2486,7 +2487,7 @@ var addClient = exports.addClient = /*#__PURE__*/function () {
       }
     }, _callee2, null, [[0, 7]]);
   }));
-  return function addClient(_x6, _x7, _x8, _x9, _x10, _x11) {
+  return function addClient(_x7, _x8, _x9, _x10, _x11, _x12) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -2640,11 +2641,12 @@ var showTask = exports.showTask = /*#__PURE__*/function () {
             data = result.data.data.getTask;
             for (i = 0; i < data.length; i++) {
               if (i == 0) {
-                html += "<tr class=\"taskdata_header\">\n                  <td>Task Name</td>\n                  <td>Description</td>\n                  <td>Employee Name</td>\n                  <td>End Date</td>\n                  <td>Current Date</td></tr>";
+                html += "<tr class=\"taskdata_header\">\n                  <th>Task Name</th>\n                  <th>Description</th>\n                  <th>Employee Name</th>\n                  <th>End Date</th>\n                  <th>Current Date</th></tr>";
               }
               formattedEndDate = new Date(data[i].endDates).toLocaleDateString();
               html += "\n              <tr class=\"taskdata_body\">\n              <td>".concat(data[i].taskName, "</td>\n              <td>").concat(data[i].description, "</td>\n              <td>").concat(data[i].employeeName, "</td>\n              <td>").concat(formattedEndDate, "</td>\n              <td>").concat(data[i].createdAt, "</td>\n              </tr>\n              ");
             }
+            console.log(html);
             rowid = $('.rowid').attr('data-rowid');
             console.log(rowid, 'rowid');
             console.log($('#' + rowid));
@@ -3133,8 +3135,9 @@ $(document).on('submit', '#task_add', function (e) {
   var description = $(this).find('input[name=description]').val();
   var endDates = $(this).find('input[name=endDates]').val();
   var projectId = $('div[data-id]').data('id');
-  console.log(taskName, employeeName, description, endDates, projectId);
-  (0, _addClient.addTask)(taskName, employeeName, description, endDates, projectId);
+  var currentDate = new Date().toLocaleDateString();
+  console.log(taskName, employeeName, description, endDates, projectId, currentDate);
+  (0, _addClient.addTask)(taskName, employeeName, description, endDates, projectId, currentDate);
 });
 
 // ADD CLIENT
@@ -3265,6 +3268,7 @@ $(document).ready(function () {
   $('.add').click(function () {
     $('.rowid').attr('data-rowid', $(this).parent().parent('tr').attr('id'));
     var projectId = $(this).data('id');
+    var currentDate = new Date().toLocaleDateString();
     if (isDataVisible) {
       $('.taskdata_header, .taskdata_body').remove();
       isDataVisible = false;
@@ -3299,7 +3303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50554" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61313" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

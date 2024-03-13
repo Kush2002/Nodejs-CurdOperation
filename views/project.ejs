@@ -96,6 +96,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        
                         <% for (let i=0; i< project.length; i++) { %>
                             <tr id='rowid<%= i+1 %>'>
                                 <td>
@@ -146,11 +147,11 @@
                                                     <div class="form-group form-group form-control-label text-muted">
                                                         <label for="names" style="margin: 5px;">Select a Employee Name </label>
                                                         <select class="btn-sm dropdown-toggle" name="employeeName" id="names">
-                                                            <% for (let i = 0; i < employee.length; i++) { %>
-                                                              <option value="<%= employee[i].empName %>" <% if(employee[i].empName === project.empName) { %>selected<% } %>> 
-                                                                <%= employee[i].empName %>
+                                                            <% for (let i = 0; i < project.length; i++) { %>
+                                                              <option value="<%= project[i].empName %>" selected> 
+                                                                <%= project[i].empName %>
                                                               </option>
-                                                            <% } %>              
+                                                            <% } %>
                                                           </select>
                                                     </div>
                                                     <div
@@ -167,8 +168,9 @@
                                                     </div>
                                                     <div
                                                     class="form-group form-group form-control-label text-muted my-4">
-                                                    <label for="currentDate">Current Date-Time</label>
-                                                    <div data-id='<%=project[i]._id %>'></div>
+                                                    <label for="dates">Current Date & Time</label>
+                                                    <input type="text" value='<%=task.createdAt %>' id="dates" class="form-control"
+                                                    name="endDates" readonly>
                                                 </div>
                                                     <br>
                                                 </div>
@@ -200,7 +202,6 @@
                                     const year=date.getFullYear();
                                     const day=String(date.getDate()).padStart(2, '0' ); 
                                     return `${day}-${month}-${year}`; } %>
-
                     </tbody>
                 </table>
     </div>
@@ -215,5 +216,4 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/bundle.js"></script>
 </body>
-
 </html>

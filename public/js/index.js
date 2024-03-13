@@ -65,8 +65,9 @@ $(document).on('submit', '#task_add', function (e) {
   let description = $(this).find('input[name=description]').val();
   let endDates = $(this).find('input[name=endDates]').val();
   let projectId = $('div[data-id]').data('id');
-  console.log(taskName, employeeName, description, endDates, projectId);
-  addTask(taskName, employeeName, description, endDates, projectId);
+  let currentDate = new Date().toLocaleDateString();
+  console.log(taskName, employeeName, description, endDates, projectId,currentDate);
+  addTask(taskName, employeeName, description, endDates, projectId, currentDate);
 });
 
 // ADD CLIENT
@@ -219,7 +220,7 @@ $(document).ready(function () {
   $('.add').click(function () {
     $('.rowid').attr('data-rowid', $(this).parent().parent('tr').attr('id'));
     var projectId = $(this).data('id');
-
+    let currentDate = new Date().toLocaleDateString();
     if (isDataVisible) {
       $('.taskdata_header, .taskdata_body').remove();
       isDataVisible = false;

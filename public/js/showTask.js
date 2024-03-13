@@ -18,11 +18,11 @@ export const showTask = async (projectId) => {
       for (let i = 0; i < data.length; i++) {
         if (i == 0) {
           html += `<tr class="taskdata_header">
-                  <td>Task Name</td>
-                  <td>Description</td>
-                  <td>Employee Name</td>
-                  <td>End Date</td>
-                  <td>Current Date</td></tr>`;
+                  <th>Task Name</th>
+                  <th>Description</th>
+                  <th>Employee Name</th>
+                  <th>End Date</th>
+                  <th>Current Date</th></tr>`;
         }
         const formattedEndDate = new Date(
           data[i].endDates
@@ -37,6 +37,7 @@ export const showTask = async (projectId) => {
               </tr>
               `;
       }
+      console.log(html);
       let rowid = $('.rowid').attr('data-rowid');
       console.log(rowid, 'rowid');
       console.log($('#' + rowid));
