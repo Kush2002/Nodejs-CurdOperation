@@ -8,6 +8,7 @@ import { editClient } from './editClient';
 import { deleteClientData } from './deleteClientData ';
 
 // ==========  SHOW TASK  ==========
+import { showTask } from './showTask';
 
 // ==========  EMPLOYEE  ==========
 import {
@@ -213,10 +214,11 @@ $(document).on('submit', '#update_project', function (e) {
   );
 });
 
-// Delete Project
-$(document).on('click', '#delete_project', function (e) {
-  e.preventDefault();
-  let id = $(this).data('id');
-  // console.log('id',id);
-  deleteProjectData(id);
+$(document).ready(function () {
+  $('.add').click(function () {
+    $('.rowid').attr('data-rowid', $(this).parent().parent('tr').attr('id'));
+    var projectId = $(this).data('id');
+    console.log(projectId);
+    showTask(projectId);
+  });
 });

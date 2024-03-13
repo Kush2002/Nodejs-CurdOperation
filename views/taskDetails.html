@@ -1,0 +1,64 @@
+<tr>
+<!-- Assuming you have a modal structure for displaying task details -->
+<div class="modal" id="taskDetailsModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+    <h2>Task Details</h2>
+    <div id="taskDetailsContainer">
+<!-- Task details will be displayed here -->
+    </div>
+</div>
+</div>
+</tr>
+
+$(document).ready(function () {
+  $('.add').click(function () {
+    let projectId = $(this).data('id');
+    let taskName = $(this).find('input[name=taskName]').val();
+    let employeeName = $(this).find('select[name=employeeName]').val();
+    let description = $(this).find('input[name=description]').val();
+    let endDates = $(this).find('input[name=endDates]').val();
+    showTask(projectId, taskName, employeeName, description, endDates);
+  });
+  // Close the modal when the close button is clicked
+  $('.close').click(function () {
+    $('#taskDetailsModal').hide();
+  });
+});
+
+export const showTask = async (
+  projectId,
+  taskName,
+  employeeName,
+  description,
+  endDates
+) => {
+  console.log(
+    'api ProjectId',
+    projectId,
+    taskName,
+    employeeName,
+    description,
+    endDates
+  );
+  try {
+    const result = await axios({
+      method: 'GET',
+      url: `http://127.0.0.1:6001/api/task/getTask/${projectId}`,
+    });
+    // Assuming you have a modal/container to display task details
+    $('#taskDetailsContainer').html(`
+        <p>Task Name: ${result.data.data.getTask.taskName}</p>
+        <p>Employee Name: ${result.data.data.getTask.employeeName}</p>
+        <p>Description: ${result.data.data.getTask.description}</p>
+        <p>End Date: ${result.data.data.getTask.endDates}</p>
+        <!-- Add other task details as needed -->
+      `);
+
+    // Show the modal
+    $('#taskDetailsModal').show();
+  } catch (err) {
+    console.error('Error fetching task details:', err);
+    showAlert('error', `${err.response.data.message}`);
+  }
+};

@@ -1,13 +1,13 @@
 const hideAlert = () => {
-    const el = $('.alert');
-    if (el) el.remove();
+  const el = $('.alert');
+  if (el) el.remove();
 };
 
 export const showAlert = (type, msg) => {
-    hideAlert();
+  hideAlert();
 
-    const markup = `<div class="alert alert-success ${type}">${msg}</div>`;
-    $('body').prepend(markup);
+  const markup = `<div class="alert alert-success ${type}">${msg}</div>`;
+  $('body').prepend(markup);
 
-    setTimeout(hideAlert,1000);
+  setTimeout(hideAlert, 10000);
 };

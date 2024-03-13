@@ -199,11 +199,12 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
     task = await Task.find();
     projects = await Project.find();
   } else if (res.locals.emp && res.locals.emp.role === employeeRole) {
-    const roles = 'employee';
+    const empName = res.locals.emp.empName;
+    employee = await Employee.find({ role: { $ne: employeeRole } });
+    const roles = 'admin';
     clients = await Client.find({ role: { $ne: roles } });
+    projects = await Project.find({ empName });
     task = await Task.find();
-    projects = await Project.find();
-    employee = await Employee.find();
   } else {
     const username = res.locals.user ? res.locals.user.username : null;
     // clients = await Client.find({ username });
@@ -213,7 +214,7 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
     projects = await Project.find({ username });
   }
   // console.log('Task', task);
-  console.log('Employee:', employee);
+  // console.log('Employee:', employee);
   res.status(200).render('project', {
     title: 'PMS Project',
     text: 'Project Management',

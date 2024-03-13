@@ -97,7 +97,7 @@
                     </thead>
                     <tbody>
                         <% for (let i=0; i< project.length; i++) { %>
-                            <tr data-rowid='<%= i+1 %>'>
+                            <tr id='rowid<%= i+1 %>'>
                                 <td>
                                     <i class="fa-solid fa-circle-plus add" data-id='<%=project[i]._id %>'></i>
                                 </td>
@@ -207,6 +207,7 @@
     </div>
     </div>
     </div>
+    <div class="rowid" data-rowid=""></div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.bundle.min.js"
