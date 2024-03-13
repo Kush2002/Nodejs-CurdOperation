@@ -215,10 +215,17 @@ $(document).on('submit', '#update_project', function (e) {
 });
 
 $(document).ready(function () {
+  let isDataVisible = false;
   $('.add').click(function () {
     $('.rowid').attr('data-rowid', $(this).parent().parent('tr').attr('id'));
     var projectId = $(this).data('id');
-    console.log(projectId);
-    showTask(projectId);
+
+    if (isDataVisible) {
+      $('.taskdata_header, .taskdata_body').remove();
+      isDataVisible = false;
+    } else {
+      showTask(projectId);
+      isDataVisible = true;
+    }
   });
 });

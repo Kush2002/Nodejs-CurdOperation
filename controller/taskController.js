@@ -21,7 +21,7 @@ exports.createTask = catchAsync(async (req, res, next) => {
 });
 
 exports.getTask = catchAsync(async (req, res, next) => {
-  console.log('projectId', req.body.projectId);
+  // console.log('projectId', req.body.projectId);
   const getTask = await Task.find();
   // const getTask = await Task.find({ projectId: req.body.projectId });
   // console.log(getTask);

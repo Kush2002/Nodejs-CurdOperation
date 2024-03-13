@@ -2,7 +2,7 @@ import axios from 'axios';
 import { showAlert } from './alert';
 
 export const showTask = async (projectId) => {
-  console.log('api ProjectId', projectId);
+  //   console.log('api ProjectId', projectId);
   try {
     const result = await axios({
       method: 'POST',
@@ -37,7 +37,6 @@ export const showTask = async (projectId) => {
               </tr>
               `;
       }
-      console.log(html, 'html');
       let rowid = $('.rowid').attr('data-rowid');
       console.log(rowid, 'rowid');
       console.log($('#' + rowid));

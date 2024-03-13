@@ -2623,9 +2623,8 @@ var showTask = exports.showTask = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          console.log('api ProjectId', projectId);
-          _context.prev = 1;
-          _context.next = 4;
+          _context.prev = 0;
+          _context.next = 3;
           return (0, _axios.default)({
             method: 'POST',
             url: "http://127.0.0.1:6001/api/task/getTask",
@@ -2633,7 +2632,7 @@ var showTask = exports.showTask = /*#__PURE__*/function () {
               projectId: projectId
             }
           });
-        case 4:
+        case 3:
           result = _context.sent;
           console.log(result);
           if (result.data.status === 'success') {
@@ -2646,23 +2645,22 @@ var showTask = exports.showTask = /*#__PURE__*/function () {
               formattedEndDate = new Date(data[i].endDates).toLocaleDateString();
               html += "\n              <tr class=\"taskdata_body\">\n              <td>".concat(data[i].taskName, "</td>\n              <td>").concat(data[i].description, "</td>\n              <td>").concat(data[i].employeeName, "</td>\n              <td>").concat(formattedEndDate, "</td>\n              <td>").concat(data[i].createdAt, "</td>\n              </tr>\n              ");
             }
-            console.log(html, 'html');
             rowid = $('.rowid').attr('data-rowid');
             console.log(rowid, 'rowid');
             console.log($('#' + rowid));
             $('#' + rowid).after(html);
           }
-          _context.next = 12;
+          _context.next = 11;
           break;
-        case 9:
-          _context.prev = 9;
-          _context.t0 = _context["catch"](1);
+        case 8:
+          _context.prev = 8;
+          _context.t0 = _context["catch"](0);
           (0, _alert.showAlert)('error', "".concat(_context.t0.response.data.message));
-        case 12:
+        case 11:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 9]]);
+    }, _callee, null, [[0, 8]]);
   }));
   return function showTask(_x) {
     return _ref.apply(this, arguments);
@@ -3263,11 +3261,17 @@ $(document).on('submit', '#update_project', function (e) {
   (0, _editProjectData.editProjectData)(id, projectName, description, startDates, endDates, username, empName, notes);
 });
 $(document).ready(function () {
+  var isDataVisible = false;
   $('.add').click(function () {
     $('.rowid').attr('data-rowid', $(this).parent().parent('tr').attr('id'));
     var projectId = $(this).data('id');
-    console.log(projectId);
-    (0, _showTask.showTask)(projectId);
+    if (isDataVisible) {
+      $('.taskdata_header, .taskdata_body').remove();
+      isDataVisible = false;
+    } else {
+      (0, _showTask.showTask)(projectId);
+      isDataVisible = true;
+    }
   });
 });
 },{"./admin":"admin.js","./login":"login.js","./addClient":"addClient.js","./editClient":"editClient.js","./deleteClientData ":"deleteClientData .js","./showTask":"showTask.js","./employee":"employee.js","./addProject":"addProject.js","./editProjectData":"editProjectData.js","./deleteProjectData":"deleteProjectData.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
