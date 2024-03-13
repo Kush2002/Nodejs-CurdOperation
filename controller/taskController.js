@@ -22,7 +22,8 @@ exports.createTask = catchAsync(async (req, res, next) => {
 });
 
 exports.getTask = catchAsync(async (req, res, next) => {
-  console.log('createdAt', new Date());
+  const currentDate = new Date().toLocaleString();
+  console.log('Date & Time', currentDate);
   const getTask = await Task.find();
   console.log(getTask);
   if (!getTask) {
