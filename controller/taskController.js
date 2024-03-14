@@ -11,7 +11,7 @@ exports.createTask = catchAsync(async (req, res, next) => {
     projectId: req.body.projectId,
     createdAt: new Date(),
   });
-  console.log(createTask);
+  // console.log(createTask);
   await createTask.save();
   res.status(201).json({
     status: 'success',
@@ -22,10 +22,12 @@ exports.createTask = catchAsync(async (req, res, next) => {
 });
 
 exports.getTask = catchAsync(async (req, res, next) => {
-  const currentDate = new Date().toLocaleString();
-  console.log('Date & Time', currentDate);
-  const getTask = await Task.find();
-  console.log(getTask);
+  // const getTask = await Task.find();
+  const getTask = await Task.find(
+    {},
+    'taskName employeeName description endDates projectId createdAt'
+  );
+  // console.log(getTask);
   if (!getTask) {
     return next(new AppError('Not found Task with that ID', 404));
   }

@@ -19,10 +19,10 @@ export const showTask = async (projectId) => {
         if (i == 0) {
           html += `<tr class="taskdata_header">
                   <th>Task Name</th>
-                  <th>Description</th>
                   <th>Employee Name</th>
+                  <th>Description</th>
                   <th>End Date</th>
-                  <th>Current Date</th></tr>`;
+                  <th>Current Date & Time</th></tr>`;
         }
         const formattedEndDate = new Date(
           data[i].endDates
@@ -30,18 +30,18 @@ export const showTask = async (projectId) => {
         html += `
               <tr class="taskdata_body">
               <td>${data[i].taskName}</td>
-              <td>${data[i].description}</td>
               <td>${data[i].employeeName}</td>
+              <td>${data[i].description}</td>
               <td>${formattedEndDate}</td>
-              <td>${data[i].createdAt}</td>
+              <td>${new Date(data[i].createdAt).toLocaleString()}</td>
               </tr>
               `;
       }
-      console.log(html);
       let rowid = $('.rowid').attr('data-rowid');
-      console.log(rowid, 'rowid');
-      console.log($('#' + rowid));
       $('#' + rowid).after(html);
+      // console.log(html);
+      // console.log(rowid, 'rowid');
+      // console.log($('#' + rowid));
     }
   } catch (err) {
     showAlert('error', `${err.response.data.message}`);

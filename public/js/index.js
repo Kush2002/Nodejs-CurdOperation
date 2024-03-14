@@ -57,19 +57,6 @@ $(document).on('click', '#logoutBtn', function (e) {
   logout();
 });
 
-// ******************************  TASK ADD  ******************************===========================
-$(document).on('submit', '#task_add', function (e) {
-  e.preventDefault();
-  let taskName = $(this).find('input[name=taskName]').val();
-  let employeeName = $(this).find('select[name=employeeName]').val();
-  let description = $(this).find('input[name=description]').val();
-  let endDates = $(this).find('input[name=endDates]').val();
-  let projectId = $('div[data-id]').data('id');
-  let currentDate = new Date().toLocaleDateString();
-  console.log(taskName, employeeName, description, endDates, projectId,currentDate);
-  addTask(taskName, employeeName, description, endDates, projectId, currentDate);
-});
-
 // ADD CLIENT
 $(document).on('submit', '#add_form', function (e) {
   e.preventDefault();
@@ -215,16 +202,44 @@ $(document).on('submit', '#update_project', function (e) {
   );
 });
 
+// ******************************  TASK ADD  ******************************===========================
+$(document).on('submit', '#task_add', function (e) {
+  e.preventDefault();
+  let projectId = $('div[data-id]').data('id');
+  let taskName = $(this).find('input[name=taskName]').val();
+  let employeeName = $(this).find('select[name=employeeName]').val();
+  let description = $(this).find('input[name=description]').val();
+  let endDates = $(this).find('input[name=endDates]').val();
+  let currentDate = new Date().toLocaleDateString();
+  // console.log(
+  //   projectId,
+  //   taskName,
+  //   employeeName,
+  //   description,
+  //   endDates,
+  //   currentDate
+  // );
+  addTask(
+    projectId,
+    taskName,
+    employeeName,
+    description,
+    endDates,
+    currentDate
+  );
+});
+
+// ===================================================Show Task Button ==========================================
 $(document).ready(function () {
   let isDataVisible = false;
   $('.add').click(function () {
     $('.rowid').attr('data-rowid', $(this).parent().parent('tr').attr('id'));
     var projectId = $(this).data('id');
-    let currentDate = new Date().toLocaleDateString();
     if (isDataVisible) {
       $('.taskdata_header, .taskdata_body').remove();
       isDataVisible = false;
     } else {
+      // console.log(projectId);
       showTask(projectId);
       isDataVisible = true;
     }

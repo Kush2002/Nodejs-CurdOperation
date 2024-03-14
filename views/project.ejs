@@ -124,13 +124,13 @@
                                     <%= project[i].notes %>
                                 </td>
                                 <% if (user && (user.role==='admin' || user.role==='user' )) { %>
-                                <td><a type="button" href='/<%=project[i].id %>/<%= task.createdAt%>' class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
+                                <td><button type="button" href='/<%=project[i].id %>/<%= task.createdAt%>' class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal<%= i%>">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
-                                </a>
+                                </button>
                                 <!-- Modal -->
                                 <form class="form" id="task_add">
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -144,21 +144,20 @@
                                                         <input type="text" id="tasktName" class="form-control"
                                                             name="taskName" placeholder="Task Name" required>
                                                     </div>
-                                                    <div class="form-group form-group form-control-label text-muted">
-                                                        <label for="names" style="margin: 5px;">Select a Employee Name </label>
+                                                    <div class="form-group form-control-label text-muted">
+                                                        <label for="names" style="margin: 5px;">Select a Employee Name</label>
                                                         <select class="btn-sm dropdown-toggle" name="employeeName" id="names">
-                                                            <% for (let i = 0; i < project.length; i++) { %>
-                                                              <option value="<%= project[i].empName %>" selected> 
-                                                                <%= project[i].empName %>
-                                                              </option>
+                                                            <% for(let j = 0; j< project[i].empName.length; j++){%>
+                                                                <option value="<%= project[i].empName[j] %>" selected>
+                                                                    <%= project[i].empName[j] %>
+                                                                </option>
                                                             <% } %>
-                                                          </select>
+                                                        </select>
                                                     </div>
-                                                    <div
-                                                        class="form-group form-group form-control-label text-muted my-4">
+                                                    <div class="form-group form-group form-control-label text-muted my-4">
                                                         <label for="desc">Description</label>
                                                         <input type="text" id="desc" class="form-control"
-                                                            name="description" placeholder="Description" required>
+                                                        name="description" placeholder="Description" required>
                                                     </div>
                                                     <div
                                                         class="form-group form-group form-control-label text-muted my-4">
@@ -166,12 +165,6 @@
                                                         <input type="date" id="endDates" class="form-control"
                                                             name="endDates" placeholder="End Date" required>
                                                     </div>
-                                                    <div
-                                                    class="form-group form-group form-control-label text-muted my-4">
-                                                    <label for="dates">Current Date & Time</label>
-                                                    <input type="text" value='<%=task.createdAt %>' id="dates" class="form-control"
-                                                    name="endDates" readonly>
-                                                </div>
                                                     <br>
                                                 </div>
                                                 <div class="modal-footer">

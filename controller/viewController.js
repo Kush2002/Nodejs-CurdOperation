@@ -208,11 +208,12 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
     task = await Task.find();
   } else {
     const username = res.locals.user ? res.locals.user.username : null;
-    // clients = await Client.find({ username });
-    clients = await Client.findOne({ username });
+    // console.log(username);
+    clients = await Client.find();
     task = await Task.find();
     employee = await Employee.find();
     projects = await Project.find({ username });
+    // console.log('projects', projects);
   }
   // console.log('Task', task);
   // console.log('Employee:', employee);
@@ -250,6 +251,7 @@ exports.add_task = catchAsync(async (req, res, next) => {
     employee = await Employee.find();
     projects = await Project.find();
     task = await Task.find();
+    z;
   } else {
     const username = res.locals.user ? res.locals.user.username : null;
     clients = await Client.find({ username });
