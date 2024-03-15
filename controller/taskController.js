@@ -24,12 +24,10 @@ exports.createTask = catchAsync(async (req, res, next) => {
 
 exports.getTask = catchAsync(async (req, res, next) => {
   // console.log(req.body);
-  let username = req.body.empName.split(',');
-  // console.log(username, 'usernameusername')
-  const empName = req.body.empName;
-  // console.log(empName);
+  let eName = req.body.empName.split(',');
+  // console.log(eName, 'eName')
   const getTask = await Task.find(
-    { employeeName: { $in: username } },
+    { employeeName: { $in: eName } },
     'projectId taskName employeeName description endDates createdAt'
   );
   // console.log(getTask);
