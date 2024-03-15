@@ -190,7 +190,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       }
       // console.log('current User', currentUser);
       // console.log('current Employee', currentEmployee);
-
       return next();
     } catch (err) {
       return next();

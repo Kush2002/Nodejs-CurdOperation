@@ -100,7 +100,7 @@
                         <% for (let i=0; i< project.length; i++) { %>
                             <tr id='rowid<%= i+1 %>'>
                                 <td>
-                                    <i class="fa-solid fa-circle-plus add" data-id='<%=project[i]._id %>'></i>
+                                    <i class="fa-solid fa-circle-plus add" data-id='<%=project[i]._id %>' data-emp='<%=project[i].empName %>'></i>
                                 </td>
                                 <td>
                                     <%= project[i].projectName %>
@@ -124,8 +124,8 @@
                                     <%= project[i].notes %>
                                 </td>
                                 <% if (user && (user.role==='admin' || user.role==='user' )) { %>
-                                <td><button type="button" href='/<%=project[i].id %>/<%= task.createdAt%>' class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal<%= i%>">
+                                <td><button type="button" href='/<%=project[i].id %>' class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal<%= i %>">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                                 <!-- Modal -->

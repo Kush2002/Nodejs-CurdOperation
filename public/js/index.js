@@ -235,12 +235,13 @@ $(document).ready(function () {
   $('.add').click(function () {
     $('.rowid').attr('data-rowid', $(this).parent().parent('tr').attr('id'));
     var projectId = $(this).data('id');
+    var empName = $(this).data('emp');
     if (isDataVisible) {
       $('.taskdata_header, .taskdata_body').remove();
       isDataVisible = false;
     } else {
-      // console.log(projectId);
-      showTask(projectId);
+      console.log(projectId,empName);
+      showTask(projectId,empName);
       isDataVisible = true;
     }
   });

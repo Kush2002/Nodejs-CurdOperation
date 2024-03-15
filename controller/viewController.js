@@ -199,13 +199,14 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
     task = await Task.find();
     projects = await Project.find();
   } else if (res.locals.emp && res.locals.emp.role === employeeRole) {
-    const empName = res.locals.emp.empName;
+    // console.log(empName);
     employee = await Employee.find({ role: { $ne: employeeRole } });
-    employee = await Employee.find();
     const roles = 'admin';
     clients = await Client.find({ role: { $ne: roles } });
-    projects = await Project.find({ empName });
+    const empNames = res.locals.emp.empName;
+    projects = await Project.find({ empName: { $in: empNames } });
     task = await Task.find();
+    // console.log(task);
   } else {
     const username = res.locals.user ? res.locals.user.username : null;
     // console.log(username);
@@ -213,7 +214,6 @@ exports.getProjectManager = catchAsync(async (req, res, next) => {
     task = await Task.find();
     employee = await Employee.find();
     projects = await Project.find({ username });
-    // console.log('projects', projects);
   }
   // console.log('Task', task);
   // console.log('Employee:', employee);

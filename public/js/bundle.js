@@ -2618,26 +2618,29 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var showTask = exports.showTask = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(projectId) {
-    var result, html, data, i, formattedEndDate, rowid;
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(projectId, empName) {
+    var result, html, data, emp, i, formattedEndDate, rowid;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          _context.next = 3;
+          console.log('api', projectId, empName);
+          _context.prev = 1;
+          _context.next = 4;
           return (0, _axios.default)({
             method: 'POST',
             url: "http://127.0.0.1:6001/api/task/getTask",
             data: {
-              projectId: projectId
+              projectId: projectId,
+              empName: empName
             }
           });
-        case 3:
+        case 4:
           result = _context.sent;
           console.log(result);
           if (result.data.status === 'success') {
             html = '';
             data = result.data.data.getTask;
+            emp = result.data.data.getTask.employeeName;
             for (i = 0; i < data.length; i++) {
               if (i == 0) {
                 html += "<tr class=\"taskdata_header\">\n                  <th>Task Name</th>\n                  <th>Employee Name</th>\n                  <th>Description</th>\n                  <th>End Date</th>\n                  <th>Current Date & Time</th></tr>";
@@ -2651,19 +2654,19 @@ var showTask = exports.showTask = /*#__PURE__*/function () {
             // console.log(rowid, 'rowid');
             // console.log($('#' + rowid));
           }
-          _context.next = 11;
+          _context.next = 12;
           break;
-        case 8:
-          _context.prev = 8;
-          _context.t0 = _context["catch"](0);
+        case 9:
+          _context.prev = 9;
+          _context.t0 = _context["catch"](1);
           (0, _alert.showAlert)('error', "".concat(_context.t0.response.data.message));
-        case 11:
+        case 12:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 8]]);
+    }, _callee, null, [[1, 9]]);
   }));
-  return function showTask(_x) {
+  return function showTask(_x, _x2) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -3276,12 +3279,13 @@ $(document).ready(function () {
   $('.add').click(function () {
     $('.rowid').attr('data-rowid', $(this).parent().parent('tr').attr('id'));
     var projectId = $(this).data('id');
+    var empName = $(this).data('emp');
     if (isDataVisible) {
       $('.taskdata_header, .taskdata_body').remove();
       isDataVisible = false;
     } else {
-      // console.log(projectId);
-      (0, _showTask.showTask)(projectId);
+      console.log(projectId, empName);
+      (0, _showTask.showTask)(projectId, empName);
       isDataVisible = true;
     }
   });
@@ -3311,7 +3315,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51085" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55536" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

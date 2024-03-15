@@ -1,20 +1,21 @@
 import axios from 'axios';
 import { showAlert } from './alert';
 
-export const showTask = async (projectId) => {
-  //   console.log('api ProjectId', projectId);
+export const showTask = async (projectId,empName) => {
+    console.log('api', projectId,empName);
   try {
     const result = await axios({
       method: 'POST',
       url: `http://127.0.0.1:6001/api/task/getTask`,
       data: {
-        projectId,
+        projectId,empName
       },
     });
     console.log(result);
     if (result.data.status === 'success') {
       let html = '';
       let data = result.data.data.getTask;
+      let emp = result.data.data.getTask.employeeName
       for (let i = 0; i < data.length; i++) {
         if (i == 0) {
           html += `<tr class="taskdata_header">

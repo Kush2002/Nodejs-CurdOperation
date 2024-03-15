@@ -1,4 +1,5 @@
 const Task = require('../model/taskModel');
+const Project = require('../model/projectModel');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 
@@ -22,10 +23,14 @@ exports.createTask = catchAsync(async (req, res, next) => {
 });
 
 exports.getTask = catchAsync(async (req, res, next) => {
-  // const getTask = await Task.find();
+  // console.log(req.body);
+  let username = req.body.empName.split(',');
+  // console.log(username, 'usernameusername')
+  const empName = req.body.empName;
+  // console.log(empName);
   const getTask = await Task.find(
-    {},
-    'taskName employeeName description endDates projectId createdAt'
+    { employeeName: { $in: username } },
+    'projectId taskName employeeName description endDates createdAt'
   );
   // console.log(getTask);
   if (!getTask) {
