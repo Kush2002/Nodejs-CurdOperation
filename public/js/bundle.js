@@ -3284,7 +3284,7 @@ $(document).ready(function () {
       $('.taskdata_header, .taskdata_body').remove();
       isDataVisible = false;
     } else {
-      console.log(projectId, empName);
+      // console.log(projectId,empName);
       (0, _showTask.showTask)(projectId, empName);
       isDataVisible = true;
     }

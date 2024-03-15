@@ -240,8 +240,8 @@ $(document).ready(function () {
       $('.taskdata_header, .taskdata_body').remove();
       isDataVisible = false;
     } else {
-      console.log(projectId,empName);
-      showTask(projectId,empName);
+      // console.log(projectId,empName);
+      showTask(projectId, empName);
       isDataVisible = true;
     }
   });
