@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        <%=title%>
+    </title>
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/css/bootstrap.min.css"
+        integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="nav navbar-nav me-auto">
+                    <% if (user && user.role==='admin' ) { %>
+                    <li class="nav-item">
+                            <a class="nav-link active" href="/home">Home
+                                <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/client">Client Management</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/employee">Employee Management</a>
+                        </li>
+                        <% } %>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/project">Project Management</a>
+                            </li>
+                </ul>
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item"><span class="nav-link">Login Guest :-</span></li>
+                    <li class="nav-item"><span class="active nav-link">
+                        <%= (emp && emp.empName) ? emp.empName : user.username %>
+                        </span></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <form class="form" id="project_form">
+        <div class="container px-4 py-5 mx-auto">
+            <div class="card card1">
+                <div class="row justify-content-center my-auto">
+                    <div class="col-md-8 col-10 my-5">
+                        <h3 class="mb-5 text-center heading">
+                            ADD TASK
+                        </h3>
+                        <div class="form-group form-group form-control-label text-muted my-4">
+                            <label for="projectName">Name</label>
+                            <input type="text" id="projectName" class="form-control" name="projectName" value="<%=employee.empName%>"
+                                placeholder="Employee Name" required>
+                        </div>
+                        <div class="form-group form-group form-control-label text-muted my-4">
+                            <label for="desc">Description</label>
+                            <input type="text" id="desc" class="form-control" name="description" placeholder="Description"
+                                required>
+                        </div>
+                        <div class="form-group form-group form-control-label text-muted my-4">
+                            <label for="endDates">Deadline</label>
+                            <input type="date" id="endDates" class="form-control" name="endDates" placeholder="End Date"
+                                required>
+                        </div>
+                        <div class="form-group form-group form-control-label text-muted">
+                            <label for="notes">Created Date</label>
+                            <input type="text" id="notes" class="form-control" name="notes" placeholder="Data/Time" required>
+                        </div>
+    
+                        <div class="form-group row justify-content-center my-4 px-3">
+                            <button type="submit" class="btn btn-outline-success">ADD TASK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
